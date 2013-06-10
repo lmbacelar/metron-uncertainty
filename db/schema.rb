@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130609155518) do
+ActiveRecord::Schema.define(version: 20130610140925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,5 +25,16 @@ ActiveRecord::Schema.define(version: 20130609155518) do
   end
 
   add_index "models", ["name"], name: "index_models_on_name", using: :btree
+
+  create_table "variables", force: true do |t|
+    t.string   "symbol",      null: false
+    t.string   "name"
+    t.text     "description"
+    t.integer  "model_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "variables", ["model_id"], name: "index_variables_on_model_id", using: :btree
 
 end
