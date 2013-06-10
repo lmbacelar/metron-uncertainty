@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20130609155518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "measurement_models", force: true do |t|
+  create_table "models", force: true do |t|
     t.string   "name",        null: false
     t.text     "description"
     t.text     "equation",    null: false
@@ -24,6 +24,6 @@ ActiveRecord::Schema.define(version: 20130609155518) do
     t.datetime "updated_at"
   end
 
-  add_index "measurement_models", ["name"], name: "index_measurement_models_on_name", using: :btree
+  add_index "models", ["name"], name: "index_models_on_name", using: :btree
 
 end

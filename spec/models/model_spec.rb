@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe MeasurementModel do
+describe Model do
   let(:model) do
-    MeasurementModel.new(name: 'name', description: 'desc', equation: '[a] + [b]')
+    Model.new(name: 'name', description: 'desc', equation: '[a] + [b]')
   end
   describe 'attributes' do
     describe 'validations' do
@@ -22,13 +22,6 @@ describe MeasurementModel do
       model.equation = "( [x] + [y] ) / ( [z] - [x] )"
       expect(model.variable_names).to eq ['x','y','z']
     end
-
-    it 'allows setting custom delimiters for variables' do
-      model = '_x_ + _y_'
-
-    end
-
-
 
     it 'saves attributes' do
       model.save!

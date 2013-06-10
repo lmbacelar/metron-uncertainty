@@ -1,4 +1,4 @@
-class MeasurementModel < ActiveRecord::Base
+class Model < ActiveRecord::Base
   validates :name,     presence: true, uniqueness: true
   validates :equation, presence: true
 

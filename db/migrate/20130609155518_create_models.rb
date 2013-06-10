@@ -1,6 +1,6 @@
-class CreateMeasurementModels < ActiveRecord::Migration
+class CreateModels < ActiveRecord::Migration
   def change
-    create_table :measurement_models do |t|
+    create_table :models do |t|
       t.string :name       , null: false, unique: true
       t.text   :description
       t.text   :equation   , null: false, unique: true
