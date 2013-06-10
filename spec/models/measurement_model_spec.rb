@@ -1,16 +1,38 @@
 require 'spec_helper'
 
 describe MeasurementModel do
-  it 'saves attributes' do
-
-    equation = <<-EQUATION
-[m]*(1-[r_air]/[r_mas])*[gl] / ([Aef]*(1+([alpha_c]+[alpha_p])*([T]-[T0]))*(1+[lambda]*[p])) - ([r_col]-[r_air])*[gl]*[h]
-    EQUATION
-    measurement_model = MeasurementModel.new(name: 'PC.40601',
-                                             description: 'Pressure gauge calibration using a piston gauge',
-                                             equation: equation)
-    measurement_model.save!
-    expect(measurement_model).to be_valid
+  let(:model) do
+    MeasurementModel.new(name: 'name', description: 'desc', equation: '[a] + [b]')
   end
+  describe 'attributes' do
+    describe 'validations' do
+      it 'requires name to be present' do
+        expect(model).to validate_presence_of :name
+      end
+      it 'requires name to be unique' do
+        model.save!
+        expect(model).to validate_uniqueness_of :name     
+      end
+      it 'requires equation to be present' do
+        expect(model).to validate_presence_of :equation
+      end
+    end
 
+    it 'gets unique variable names from equation' do
+      model.equation = "( [x] + [y] ) / ( [z] - [x] )"
+      expect(model.variable_names).to eq ['x','y','z']
+    end
+
+    it 'allows setting custom delimiters for variables' do
+      model = '_x_ + _y_'
+
+    end
+
+
+
+    it 'saves attributes' do
+      model.save!
+      expect(model).to be_valid
+    end
+  end
 end
