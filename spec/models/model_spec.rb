@@ -31,15 +31,50 @@ describe Model do
     it 'has many variables' do
       expect(model).to have_many :variables
     end
-    it 'populates variables defined on equation' do
-      model.save!
-      expect(model.variables.populate).to eq ['a','b']
-      expect(model.variables.length).to eq 2
+
+    describe 'variables' do
+      before(:each) { model.save! }
+
+      context 'new equation' do
+        it 'creates variables' do
+          expect(model.variables.count).to eq 2
+        end
+      end
+
+      context 'equation unchanged' do
+        it 'does not trigger variables update' do
+          model.should_not_receive :update_variables
+          model.save!
+        end
+      end
+
+      context 'equation changed' do
+        it 'keeps existing variables' do
+          a = model.variables.find_by symbol: 'a'
+          model.equation = '2 * [a]'
+          model.save!
+          expect(model.variables.first).to eq a
+        end
+        it 'destroys unused variables' do
+          model.equation = '2 * [a]'
+          model.save!
+          expect(model.variables.count).to eq 1
+        end
+        it 'updates each variable once' do
+          model.equation = '( [a]*[a] ) / [b]'
+          model.should_receive(:update_variable).exactly(2).times
+          model.save!
+        end
+      end
+
+      context 'equation destroyed' do
+        it 'destroys all variables' do
+          vars = model.variables
+          model.destroy
+          expect(vars.count).to eq 0
+        end
+      end
     end
   end
 
-  xit 'gets unique variable names from equation' do
-    model.equation = "( [x] + [y] ) / ( [z] - [x] )"
-    expect(model.variable_names).to eq ['x','y','z']
-  end
 end
