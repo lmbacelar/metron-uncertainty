@@ -14,7 +14,7 @@ gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'slim-rails'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.14.0.rc1'
   gem 'capybara'
   gem 'shoulda-matchers', '1.5.4'
 end
