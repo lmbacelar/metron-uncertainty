@@ -43,7 +43,7 @@ describe Model do
 
       context 'equation unchanged' do
         it 'does not trigger variables update' do
-          model.should_not_receive :update_variables
+          expect(model).not_to receive(:update_variables)
           model.save!
         end
       end
@@ -62,7 +62,7 @@ describe Model do
         end
         it 'updates each variable once' do
           model.equation = '( [a]*[a] ) / [b]'
-          model.should_receive(:update_variable).exactly(2).times
+          expect(model).to receive(:update_variable).exactly(2).times
           model.save!
         end
       end
