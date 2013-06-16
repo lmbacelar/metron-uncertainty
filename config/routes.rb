@@ -1,4 +1,4 @@
 Metron::Application.routes.draw do
-  resources :model
-  root      'model#index'
+  resources :models
+  root      'models#index'
 end
