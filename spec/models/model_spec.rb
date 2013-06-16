@@ -77,4 +77,21 @@ describe Model do
     end
   end
 
+  describe 'scopes' do
+    describe 'recent' do
+      before(:each) do
+        (1..13).each { |i| Model.create! name: i, equation: '[x]' }
+      end
+
+      it 'displays 12 most recent models' do
+        expect(Model.recent.count).to eq 12
+      end
+
+      it 'displays models in reverse chronological order' do
+        expect(Model.recent.first.name).to eq '13'
+        expect(Model.recent.last.name).to  eq '2'
+      end
+    end
+  end
+
 end

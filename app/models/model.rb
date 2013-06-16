@@ -2,6 +2,8 @@ class Model < ActiveRecord::Base
   validates :name,     presence: true, uniqueness: true
   validates :equation, presence: true
 
+  scope :recent, -> { order(:created_at).reverse_order.limit(12) }
+
   has_many  :variables, dependent: :destroy
 
   after_save :update_variables, if: :equation_changed?
