@@ -1,0 +1,12 @@
+pc34401:
+  name: 'PC.34401'
+  description: 'Direct voltage determination by measuring differences to DC electronic voltage reference'
+  equation: '[V_s] + [V_d]'
+pc34901:
+  name: 'PC.34901'
+  description: 'Direct current determination by measuring voltage accross known current'
+  equation: '[V] / [R_s]'
+pc40602:
+  name: 'PC.40602'
+  description: 'Pressure determination by comparison with piston gauge'
+  equation: '( ([m] * [g_l] * (1 - ([rho_a] / [rho_m])) ) / ([A_e] * (1 + ([alpha_c] + [alpha_p])*([T] - [T_0])) * (1 + [lambda] * [m] * [g_l] / [A_e])) ) + ([rho_f] - [rho_a]) * [g_l] * [h]'
