@@ -17,6 +17,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.14.0.rc1'
   gem 'capybara'
   gem 'shoulda-matchers', '1.5.4'
+  gem 'launchy'
 end
 
 group :doc do
