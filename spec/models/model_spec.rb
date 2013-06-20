@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../../lib/equation_validator.rb'
 
 describe Model do
   let(:model) do
@@ -18,7 +19,8 @@ describe Model do
         expect(model).to validate_presence_of :equation
       end
       it 'validates equation' do
-        pending
+        expect_any_instance_of(EquationValidator).to receive(:validate_each).once.with(model, :equation, model.equation)
+        model.valid?
       end
     end
     it 'saves attributes' do
