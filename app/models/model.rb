@@ -1,6 +1,6 @@
 class Model < ActiveRecord::Base
-  validates :name,     presence: true, uniqueness: true
-  validates :equation, presence: true, equation: true
+  validates :name,     presence: true, uniqueness:   true
+  validates :equation, presence: true, r_expression: true
 
   scope :recent, -> { order(:created_at).reverse_order.limit(12) }
 

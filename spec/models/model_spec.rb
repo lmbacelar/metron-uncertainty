@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../lib/equation_validator.rb'
+require_relative '../../lib/r_expression_validator.rb'
 
 describe Model do
   let(:model) do
@@ -18,8 +18,8 @@ describe Model do
       it 'requires equation to be present' do
         expect(model).to validate_presence_of :equation
       end
-      it 'validates equation' do
-        expect_any_instance_of(EquationValidator).to receive(:validate_each).once.with(model, :equation, model.equation)
+      it 'validates equation as a proper R expression' do
+        expect_any_instance_of(RExpressionValidator).to receive(:validate_each).once.with(model, :equation, model.equation)
         model.valid?
       end
     end
