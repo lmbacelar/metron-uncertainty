@@ -1,9 +1,8 @@
 require 'spec_helper'
-require_relative '../../lib/r_expression_validator.rb'
 
 describe Model do
   let(:model) do
-    Model.new(name: 'name', description: 'desc', equation: '[a] + [b]')
+    Model.new(name: 'name', description: 'desc', equation: 'X$a + X$b')
   end
 
   describe 'attributes' do
@@ -53,17 +52,17 @@ describe Model do
       context 'equation changed' do
         it 'keeps existing variables' do
           a = model.variables.find_by symbol: 'a'
-          model.equation = '2 * [a]'
+          model.equation = '2 * X$a'
           model.save!
           expect(model.variables.first).to eq a
         end
         it 'destroys unused variables' do
-          model.equation = '2 * [a]'
+          model.equation = '2 * X$a'
           model.save!
           expect(model.variables.count).to eq 1
         end
         it 'updates each variable once' do
-          model.equation = '( [a]*[a] ) / [b]'
+          model.equation = '( X$a*X$a ) / X$b'
           expect(model).to receive(:update_variable).exactly(2).times
           model.save!
         end
@@ -82,7 +81,7 @@ describe Model do
   describe 'scopes' do
     describe 'recent' do
       before(:each) do
-        (1..13).each { |i| Model.create! name: i, equation: '[x]' }
+        (1..13).each { |i| Model.create! name: i, equation: 'X$x' }
       end
 
       it 'displays 12 most recent models' do

@@ -15,11 +15,11 @@ class Model < ActiveRecord::Base
   end
 
   private
-  def equation_symbols
-    equation.scan(/\[(.*?)\]/).flatten.uniq
-  end
-
   def update_variable s
     variables.find_or_create_by symbol: s
+  end
+
+  def equation_symbols
+    equation.scan(/X\$(\w*)/).flatten.uniq
   end
 end
