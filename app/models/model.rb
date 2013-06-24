@@ -1,12 +1,19 @@
 class Model < ActiveRecord::Base
   validates :name,     presence: true, uniqueness:   true
   validates :equation, presence: true, r_expression: true
+  validates :url,      presence: true
 
   scope :recent, -> { order(:created_at).reverse_order.limit(12) }
 
   has_many  :variables, dependent: :destroy
 
   after_save :update_variables, if: :equation_changed?
+
+  acts_as_url :name, sync_url: true
+
+  def to_param
+    url
+  end
 
   protected
   def update_variables

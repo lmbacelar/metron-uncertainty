@@ -2,7 +2,10 @@ require 'spec_helper'
 
 describe Model do
   let(:model) do
-    Model.new(name: 'name', description: 'desc', equation: 'X$a + X$b')
+    Model.new(name: 'name of model', description: 'description of model', equation: 'X$a + X$b')
+  end
+  let(:another_model) do
+    Model.new(name: 'name-of-model', description: 'description of model', equation: 'X$a + X$b')
   end
 
   describe 'attributes' do
@@ -25,6 +28,23 @@ describe Model do
     it 'saves attributes' do
       model.save!
       expect(model).to be_valid
+    end
+    describe 'url slug' do
+      it 'is created when saving model' do
+        model.save!
+        expect(model.url).to eq 'name-of-model'
+      end
+      it 'is updated when model name changes' do
+        model.save!
+        model.name = 'another model name'
+        model.save!
+        expect(model.url).to eq 'another-model-name'
+      end
+      it 'is unique' do
+        model.save!
+        another_model.save!
+        expect(model.url).not_to eq another_model.url
+      end
     end
   end
 
@@ -92,6 +112,13 @@ describe Model do
         expect(Model.recent.first.name).to eq '13'
         expect(Model.recent.last.name).to  eq '2'
       end
+    end
+  end
+
+  describe '#to_param' do
+    it 'should return url' do
+      model.valid?
+      expect(model.to_param).to eq model.url
     end
   end
 
