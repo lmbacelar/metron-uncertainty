@@ -13,6 +13,8 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'sass-rails', '~> 4.0.0.rc1'
 gem 'slim-rails'
 
+gem 'stringex'
+
 gem 'rserve-simpler'
 
 group :development, :test do
