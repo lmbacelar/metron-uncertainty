@@ -6,5 +6,6 @@ tmp/
 *.swp
 *.swo
 *~
+.keep
 public/uploads/
 config/database.yml
