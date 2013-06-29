@@ -40,9 +40,15 @@ describe 'Models detail' do
         expect(page).to have_selector 'div.model dl dd', text: 'piston gauge'
       end
 
-      it 'displays equation with links to variables' do
-        pending 'inplement helper method to repalce X$(...) by link_to variable'
-        expect(page).to have_selector 'div.model dl dt', text: 'Equation'
+      it 'has a variables section' do
+        expect(page).to have_selector 'h3', text: 'Variables'
+      end
+
+      it 'displays and links to equation variables' do
+        pending 'should change fixtures to facory first'
+        # expect(page).to have_selector 'div.variables dl dt a', text: 'm'
+        # expect(page).to have_selector 'div.variables dl dt a', text: 'h'
+        # expect(page).to have_selector 'div.variables dl dd',   text: ''
       end
     end
 
