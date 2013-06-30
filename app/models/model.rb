@@ -5,7 +5,7 @@ class Model < ActiveRecord::Base
 
   scope :recent, -> { order(:created_at).reverse_order.limit(12) }
 
-  has_many  :variables, dependent: :destroy
+  has_many  :variables, -> { order(:created_at) }, dependent: :destroy
 
   after_save :update_variables, if: :equation_changed?
 

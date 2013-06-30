@@ -1,12 +1,8 @@
 require 'spec_helper'
 
 describe Model do
-  let(:model) do
-    Model.new(name: 'name of model', description: 'description of model', equation: 'X$a + X$b')
-  end
-  let(:another_model) do
-    Model.new(name: 'name-of-model', description: 'description of model', equation: 'X$a + X$b')
-  end
+  let(:model)          { FactoryGirl.build :model, name: 'name of model' }
+  let(:another_model)  { FactoryGirl.build :model, name: 'name-of-model' }
 
   describe 'attributes' do
     describe 'validations' do
@@ -100,17 +96,14 @@ describe Model do
 
   describe 'scopes' do
     describe 'recent' do
-      before(:each) do
-        (1..13).each { |i| Model.create! name: i, equation: 'X$x' }
-      end
+      before(:each) { FactoryGirl.create_list :model, 13 }
 
       it 'displays 12 most recent models' do
         expect(Model.recent.count).to eq 12
       end
 
       it 'displays models in reverse chronological order' do
-        expect(Model.recent.first.name).to eq '13'
-        expect(Model.recent.last.name).to  eq '2'
+        expect(Model.recent.first.created_at).to be > Model.recent.last.created_at
       end
     end
   end
