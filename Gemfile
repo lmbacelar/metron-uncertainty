@@ -23,6 +23,7 @@ group :development, :test do
   gem 'shoulda-matchers', '1.5.4'
   gem 'launchy'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'lorem'
 end
 
 group :doc do
