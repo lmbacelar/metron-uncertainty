@@ -17,4 +17,10 @@ This app implements several metrology tools. Goals are:
 ## Install
 Just clone
 
-    `git clone https://github.com/lmbacelar/metron.git`
+  `git clone https://github.com/lmbacelar/metron.git`
+
+### Dependencies
+
+* R installed on local machine
+* Rserve package installed on R
+* Rserve binary installed on system
