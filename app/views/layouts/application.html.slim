@@ -11,16 +11,18 @@ head
   /! Set the viewport width to device width for mobile
   meta name="viewport" content="width=device-width, initial-scale=1.0"
 
-  title= title
   = stylesheet_link_tag     'application', media: 'all', "data-turbolinks-track" => true
   = javascript_include_tag  'application', 'vendor/custom.modernizr', "data-turbolinks-track" => true
   = csrf_meta_tags
 
-body
-  = render 'layouts/topbar'
+  title= title
 
-  div.row
-    div.large-9.columns
+body
+  nav.top-bar
+    = render 'layouts/topbar'
+
+  div.page
+    section.main
       = yield
-    div.large-3.columns
+    section.sidebar
       = yield :sidebar
