@@ -10,6 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
+gem 'simple_form'
 gem 'sass-rails', '~> 4.0.0'
 gem 'slim-rails'
 gem 'zurb-foundation'
