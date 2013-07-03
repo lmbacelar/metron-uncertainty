@@ -1,11 +1,26 @@
 doctype html
-html
-  head
-    title= title
-    = stylesheet_link_tag     'application', media: 'all', "data-turbolinks-track" => true
-    = javascript_include_tag  'application', "data-turbolinks-track" => true
-    = csrf_meta_tags
+/!paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+/[if lt IE 7 ] html.ie6
+/[if IE 7 ] html class="ie7"
+/[if IE 8 ] html class="ie8"
+/[if (gte IE 9)|!(IE)] html
+head
+  /! Uncomment to make IE8 render like IE7
+  /! meta http-equiv="X-UA-Compatible" content="IE=7"
 
-  body
-    h1= title
-    = yield
+  /! Set the viewport width to device width for mobile
+  meta name="viewport" content="width=device-width, initial-scale=1.0"
+
+  title= title
+  = stylesheet_link_tag     'application', media: 'all', "data-turbolinks-track" => true
+  = javascript_include_tag  'application', 'vendor/custom.modernizr', "data-turbolinks-track" => true
+  = csrf_meta_tags
+
+body
+  = render 'layouts/topbar'
+
+  div.row
+    div.large-9.columns
+      = yield
+    div.large-3.columns
+      = yield :sidebar
