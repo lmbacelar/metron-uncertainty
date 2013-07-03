@@ -20,7 +20,7 @@ describe 'Models Page' do
   end
 end
 
-describe 'Models detail' do
+describe 'show a Model' do
   let(:model) { FactoryGirl.create :model }
 
   describe 'GET /models/:id' do
@@ -47,6 +47,35 @@ describe 'Models detail' do
       expect(page).to have_selector 'div.variables dl dt a', text: 'a'
       expect(page).to have_selector 'div.variables dl dt a', text: 'b'
       expect(page).to have_selector 'div.variables dl dd',   text: ''
+    end
+  end
+end
+
+describe 'Create and Update Model' do
+  describe 'POST /models' do
+    context 'valid data' do
+      before(:each) do
+        visit '/models'
+        click_on 'New Model'
+        fill_in 'Name',     with: 'a new model'
+        fill_in 'Equation', with: 'X$a + X$b'
+        click_on 'Create'
+      end
+      let(:model) { Model.find_by name: 'a new model' }
+      
+      it 'creates a valid model' do
+        expect(model).to be_valid
+      end
+    end
+    context 'invalid data' do
+      it 'throws an error' do
+        visit '/models/new'
+        fill_in 'Name',     with: 'another new model'
+        fill_in 'Equation', with: 'X$a + ('
+        click_on 'Create'
+        expect(page).to have_selector 'div#error'
+
+      end
     end
   end
 end

@@ -1,0 +1,9 @@
+= simple_form_for model do |f|
+  f.error_notifications
+  fieldset
+    .inputs
+      = f.input :name,        required: true
+      = f.input :description
+      = f.input :equation,    required: true
+    .actions
+      = f.button :submit

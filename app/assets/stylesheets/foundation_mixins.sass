@@ -3,6 +3,15 @@
 .page
   @include grid-row
 
+.flash
+  .notice
+    @include alert($success-color)
+  .error
+    @include alert($alert-color)
+  .notice, .error
+    .close
+      @include alert-close
+
 .main
   @include grid-column(9)
 

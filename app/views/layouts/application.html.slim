@@ -22,6 +22,12 @@ body
     = render 'layouts/topbar'
 
   div.page
+    div.flash
+      - flash.each do |name, msg|
+        div class=name data-alert="data-alert"
+          = msg
+          a ref='#' class='close' &times;
+
     section.main
       = yield
     section.sidebar
